@@ -34,6 +34,6 @@ esac
 # --xattrs: preserve extended attributes
 
 START=$(date +%s)
-rsync --archive --acls --xattrs --delete --verbose /home "$1"
+rsync --archive --acls --xattrs --delete --verbose --exclude-from '/home/sid/Dev/ScriptsAS/exclude-list.txt' /home "$1"
 FINISH=$(date +%s)
 echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds" | tee $1/"Backup from $(date '+%Y-%m-%d, %T, %A')"

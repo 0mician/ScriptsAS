@@ -1,0 +1,9 @@
+.cache/
+.mozilla/
+.mplayer/
+.mu/
+.npm/
+.pip/
+.vagrant.d/
+.local/
+.config/
