@@ -2,6 +2,8 @@
 
 # Usage: # /home/user/Scripts/backup.sh /some/destination (as root)
 
+EXCLUSION_LIST=`pwd -P $0`/`dirname $0`/exclude-list.txt
+echo $EXCLUSION_LIST
 if [ $# -lt 1 ]; then
     echo "No destination defined. Usage: $0 destination" >&2
     exit 1
@@ -34,6 +36,6 @@ esac
 # --xattrs: preserve extended attributes
 
 START=$(date +%s)
-rsync --archive --acls --xattrs --delete --verbose --exclude-from '/home/sid/Dev/ScriptsAS/exclude-list.txt' /home "$1"
+rsync --archive --acls --xattrs --delete --verbose --exclude-from $EXCLUSION_LIST /home "$1"
 FINISH=$(date +%s)
 echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds" | tee $1/"Backup from $(date '+%Y-%m-%d, %T, %A')"
